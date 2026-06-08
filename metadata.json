@@ -1,0 +1,6 @@
+{
+  "name": "My Classes",
+  "description": "Premium dark-themed Student Portal and Classes Viewer connected to Firebase.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
