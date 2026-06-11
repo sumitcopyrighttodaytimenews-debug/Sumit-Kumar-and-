@@ -18,10 +18,10 @@ class PortalViewModel(application: Application) : AndroidViewModel(application) 
     private val sharedPrefs = application.getSharedPreferences("student_portal_prefs", Context.MODE_PRIVATE)
 
     // Current logged-in student info
-    private val _studentId = MutableStateFlow<String?>(sharedPrefs.getString("studentId", "guest_user") ?: "guest_user")
+    private val _studentId = MutableStateFlow<String?>(sharedPrefs.getString("studentId", null))
     val studentId: StateFlow<String?> = _studentId.asStateFlow()
 
-    private val _studentName = MutableStateFlow<String?>(sharedPrefs.getString("studentName", "Guest Learner") ?: "Guest Learner")
+    private val _studentName = MutableStateFlow<String?>(sharedPrefs.getString("studentName", null))
     val studentName: StateFlow<String?> = _studentName.asStateFlow()
 
     // Screen states

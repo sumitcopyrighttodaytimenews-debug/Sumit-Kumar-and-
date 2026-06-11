@@ -68,7 +68,11 @@ fun PortalApp(viewModel: PortalViewModel) {
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            MainAppScreen(viewModel)
+            if (studentId == null) {
+                AuthScreen(viewModel)
+            } else {
+                MainAppScreen(viewModel)
+            }
         }
     }
 }
@@ -136,6 +140,9 @@ fun MainAppScreen(viewModel: PortalViewModel) {
                         }
                         IconButton(onClick = { viewModel.loadBookmarksAndWatchMetrics(); activeTab = 2 }) {
                             Icon(Icons.Filled.Bookmark, contentDescription = "Bookmarks", tint = MaterialTheme.colorScheme.primary)
+                        }
+                        IconButton(onClick = { viewModel.logout() }) {
+                            Icon(Icons.Filled.Logout, contentDescription = "Logout", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }
@@ -284,7 +291,7 @@ fun AuthScreen(viewModel: PortalViewModel) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.background)
             .padding(24.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -316,7 +323,7 @@ fun AuthScreen(viewModel: PortalViewModel) {
                 Text(
                     text = "Welcome Back",
                     style = MaterialTheme.typography.headlineMedium.copy(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.ExtraBold,
                         letterSpacing = (-0.5).sp
                     )
@@ -341,8 +348,8 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = MaterialTheme.colorScheme.surface,
                         unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                         focusedIndicatorColor = MaterialTheme.colorScheme.primary,
                         unfocusedIndicatorColor = MaterialTheme.colorScheme.outline
                     ),
@@ -367,7 +374,7 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = Color.Black
+                        contentColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
@@ -375,7 +382,7 @@ fun AuthScreen(viewModel: PortalViewModel) {
                         .testTag("login_button")
                 ) {
                     if (isLoading) {
-                        CircularProgressIndicator(color = Color.Black, modifier = Modifier.size(24.dp))
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(24.dp))
                     } else {
                         Text("Login to Classes", fontWeight = FontWeight.Bold, fontSize = 15.sp)
                     }
@@ -385,7 +392,7 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     modifier = Modifier.padding(top = 10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("New Student? ", color = Color.LightGray, fontSize = 13.sp)
+                    Text("New Student? ", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
                     Text(
                         text = "Create Account",
                         color = MaterialTheme.colorScheme.tertiary,
@@ -399,7 +406,7 @@ fun AuthScreen(viewModel: PortalViewModel) {
                 Text(
                     text = "Create Account",
                     style = MaterialTheme.typography.headlineMedium.copy(
-                        color = Color.White,
+                        color = MaterialTheme.colorScheme.onBackground,
                         fontWeight = FontWeight.ExtraBold
                     )
                 )
@@ -420,8 +427,8 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = MaterialTheme.colorScheme.surface,
                         unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                         focusedIndicatorColor = MaterialTheme.colorScheme.primary,
                         unfocusedIndicatorColor = MaterialTheme.colorScheme.outline
                     ),
@@ -438,8 +445,8 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = MaterialTheme.colorScheme.surface,
                         unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                         focusedIndicatorColor = MaterialTheme.colorScheme.primary,
                         unfocusedIndicatorColor = MaterialTheme.colorScheme.outline
                     ),
@@ -456,8 +463,8 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = MaterialTheme.colorScheme.surface,
                         unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                         focusedIndicatorColor = MaterialTheme.colorScheme.primary,
                         unfocusedIndicatorColor = MaterialTheme.colorScheme.outline
                     ),
@@ -475,8 +482,8 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = MaterialTheme.colorScheme.surface,
                         unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                         focusedIndicatorColor = MaterialTheme.colorScheme.primary,
                         unfocusedIndicatorColor = MaterialTheme.colorScheme.outline
                     ),
@@ -494,8 +501,8 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     colors = TextFieldDefaults.colors(
                         focusedContainerColor = MaterialTheme.colorScheme.surface,
                         unfocusedContainerColor = MaterialTheme.colorScheme.surface,
-                        focusedTextColor = Color.White,
-                        unfocusedTextColor = Color.White,
+                        focusedTextColor = MaterialTheme.colorScheme.onSurface,
+                        unfocusedTextColor = MaterialTheme.colorScheme.onSurface,
                         focusedIndicatorColor = MaterialTheme.colorScheme.primary,
                         unfocusedIndicatorColor = MaterialTheme.colorScheme.outline
                     ),
@@ -512,14 +519,14 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.primary,
-                        contentColor = Color.Black
+                        contentColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     modifier = Modifier
                         .fillMaxWidth()
                         .height(50.dp)
                 ) {
                     if (isLoading) {
-                        CircularProgressIndicator(color = Color.Black, modifier = Modifier.size(24.dp))
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary, modifier = Modifier.size(24.dp))
                     } else {
                         Text("Register Now", fontWeight = FontWeight.Bold, fontSize = 15.sp)
                     }
@@ -529,7 +536,7 @@ fun AuthScreen(viewModel: PortalViewModel) {
                     modifier = Modifier.padding(top = 10.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Already registered? ", color = Color.LightGray, fontSize = 13.sp)
+                    Text("Already registered? ", color = MaterialTheme.colorScheme.onSurfaceVariant, fontSize = 13.sp)
                     Text(
                         text = "Login Here",
                         color = MaterialTheme.colorScheme.tertiary,
@@ -1324,57 +1331,98 @@ fun CustomVideoPlayer(
                     .fillMaxSize()
                     .background(Color.Black.copy(alpha = 0.5f))
             ) {
-                IconButton(
-                    onClick = {
-                        videoViewRefs?.let { vv ->
-                            if (vv.isPlaying) {
-                                vv.pause()
-                                isPlaying = false
-                            } else {
-                                vv.start()
-                                isPlaying = true
-                            }
-                        }
-                    },
-                    modifier = Modifier
-                        .size(52.dp)
-                        .align(Alignment.Center)
-                        .background(Color.Black.copy(alpha = 0.6f), RoundedCornerShape(26.dp))
-                        .border(1.dp, Color.White.copy(alpha = 0.3f), RoundedCornerShape(26.dp))
+                Row(
+                    modifier = Modifier.align(Alignment.Center),
+                    horizontalArrangement = Arrangement.spacedBy(40.dp),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = if (isPlaying) Icons.Filled.Pause else Icons.Filled.PlayArrow,
-                        contentDescription = "Central Play State Toggle",
-                        tint = Color.White,
-                        modifier = Modifier.size(28.dp)
-                    )
+                    IconButton(
+                        onClick = {
+                            videoViewRefs?.let { vv ->
+                                vv.seekTo(maxOf(0, vv.currentPosition - 10000))
+                                currentPosition = vv.currentPosition.toLong()
+                            }
+                        },
+                        modifier = Modifier.size(48.dp)
+                    ) {
+                        Icon(
+                            Icons.Filled.FastRewind,
+                            contentDescription = "Rewind 10s",
+                            tint = Color.White,
+                            modifier = Modifier.size(36.dp)
+                        )
+                    }
+
+                    IconButton(
+                        onClick = {
+                            videoViewRefs?.let { vv ->
+                                if (vv.isPlaying) {
+                                    vv.pause()
+                                    isPlaying = false
+                                } else {
+                                    vv.start()
+                                    isPlaying = true
+                                }
+                            }
+                        },
+                        modifier = Modifier
+                            .size(64.dp)
+                            .background(Color.Black.copy(alpha = 0.5f), RoundedCornerShape(32.dp))
+                    ) {
+                        Icon(
+                            imageVector = if (isPlaying) Icons.Filled.Pause else Icons.Filled.PlayArrow,
+                            contentDescription = "Play/Pause",
+                            tint = Color.White,
+                            modifier = Modifier.size(40.dp)
+                        )
+                    }
+
+                    IconButton(
+                        onClick = {
+                            videoViewRefs?.let { vv ->
+                                vv.seekTo(minOf(vv.duration, vv.currentPosition + 10000))
+                                currentPosition = vv.currentPosition.toLong()
+                            }
+                        },
+                        modifier = Modifier.size(48.dp)
+                    ) {
+                        Icon(
+                            Icons.Filled.FastForward,
+                            contentDescription = "Forward 10s",
+                            tint = Color.White,
+                            modifier = Modifier.size(36.dp)
+                        )
+                    }
                 }
 
                 Column(
                     modifier = Modifier
                         .fillMaxWidth()
                         .align(Alignment.BottomCenter)
-                        .padding(horizontal = 14.dp, vertical = 6.dp)
+                        .padding(horizontal = 8.dp, vertical = 2.dp)
                 ) {
-                    Box(
+                    val progressFraction = if (duration > 0) currentPosition.toFloat() / duration.toFloat() else 0f
+                    Slider(
+                        value = progressFraction,
+                        onValueChange = { newVal ->
+                            val target = (duration * newVal).toLong()
+                            videoViewRefs?.seekTo(target.toInt())
+                            currentPosition = target
+                        },
+                        colors = SliderDefaults.colors(
+                            thumbColor = Color.Red,
+                            activeTrackColor = Color.Red,
+                            inactiveTrackColor = Color.White.copy(alpha = 0.5f)
+                        ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(6.dp)
-                            .background(Color.White.copy(alpha = 0.3f), RoundedCornerShape(3.dp))
-                    ) {
-                        val progressFraction = if (duration > 0) currentPosition.toFloat() / duration.toFloat() else 0f
-                        Box(
-                            modifier = Modifier
-                                .fillMaxWidth(progressFraction.coerceIn(0f, 1f))
-                                .fillMaxHeight()
-                                .background(MaterialTheme.colorScheme.primary, RoundedCornerShape(3.dp))
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.height(10.dp))
+                            .height(24.dp)
+                    )
 
                     Row(
-                        modifier = Modifier.fillMaxWidth(),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(bottom = 8.dp, start = 8.dp, end = 8.dp),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
