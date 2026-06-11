@@ -1,31 +1,88 @@
 package com.example.ui.theme
 
+import android.app.Activity
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 
 private val LightColorScheme = lightColorScheme(
-    primary = PrimaryColor,
-    onPrimary = LightSurface,
-    secondary = SecondaryAccent,
-    onSecondary = LightSurface,
-    tertiary = PrimaryHover,
-    background = LightBg,
-    onBackground = TextDark,
-    surface = LightSurface,
-    onSurface = TextDark,
-    surfaceVariant = LightCard,
-    onSurfaceVariant = TextGray,
-    outline = LightBorder
+    primary = PremiumPrimary,
+    onPrimary = PremiumSurfaceLight,
+    primaryContainer = PremiumPrimary.copy(alpha = 0.1f),
+    onPrimaryContainer = PremiumPrimaryDark,
+    secondary = PremiumSecondary,
+    onSecondary = PremiumSurfaceLight,
+    secondaryContainer = PremiumSecondary.copy(alpha = 0.1f),
+    onSecondaryContainer = PremiumSecondary,
+    background = PremiumBackgroundLight,
+    onBackground = PremiumTextDark,
+    surface = PremiumSurfaceLight,
+    onSurface = PremiumTextDark,
+    surfaceVariant = PremiumSurfaceVariantLight,
+    onSurfaceVariant = PremiumTextMuted,
+    outline = PremiumSurfaceVariantLight,
+    error = PremiumError,
+    onError = PremiumSurfaceLight
+)
+
+private val DarkColorScheme = darkColorScheme(
+    primary = PremiumPrimary,
+    onPrimary = PremiumSurfaceLight,
+    primaryContainer = PremiumPrimary.copy(alpha = 0.2f),
+    onPrimaryContainer = PremiumPrimary,
+    secondary = PremiumSecondary,
+    onSecondary = PremiumSurfaceLight,
+    secondaryContainer = PremiumSecondary.copy(alpha = 0.2f),
+    onSecondaryContainer = PremiumSecondary,
+    background = PremiumBackgroundDark,
+    onBackground = PremiumTextLight,
+    surface = PremiumSurfaceDark,
+    onSurface = PremiumTextLight,
+    surfaceVariant = PremiumSurfaceVariantDark,
+    onSurfaceVariant = PremiumTextMutedDark,
+    outline = PremiumSurfaceVariantDark,
+    error = PremiumError,
+    onError = PremiumSurfaceDark
 )
 
 @Composable
 fun MyApplicationTheme(
-    darkTheme: Boolean = false, // Force Light theme standard
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    dynamicColor: Boolean = false, // We disable dynamic color to preserve our premium branding
     content: @Composable () -> Unit
 ) {
+    val colorScheme = when {
+        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
+            val context = LocalContext.current
+            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
+        }
+        darkTheme -> DarkColorScheme
+        else -> LightColorScheme
+    }
+
+    val view = LocalView.current
+    if (!view.isInEditMode) {
+        SideEffect {
+            val window = (view.context as Activity).window
+            window.statusBarColor = android.graphics.Color.TRANSPARENT
+            window.navigationBarColor = android.graphics.Color.TRANSPARENT
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
+            WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = !darkTheme
+        }
+    }
+
     MaterialTheme(
-        colorScheme = LightColorScheme,
+        colorScheme = colorScheme,
         typography = Typography,
         content = content
     )

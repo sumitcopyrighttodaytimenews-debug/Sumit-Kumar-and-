@@ -2,15 +2,23 @@ package com.example.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// PW-like Clean Light Theme Colors
-val PrimaryColor = Color(0xFF5A4FCF) // PW Indigo
-val PrimaryHover = Color(0xFF4B42B0)
-val SecondaryAccent = Color(0xFFE32636) // Red accent (like YouTube/PW)
-val LightBg = Color(0xFFF9FAFB) // Very light gray background
-val LightSurface = Color(0xFFFFFFFF) // White cards
-val LightCard = Color(0xFFF3F4F6) // Slight offset for inner cards
-val LightBorder = Color(0xFFE5E7EB)
-val TextDark = Color(0xFF111827)
-val TextGray = Color(0xFF6B7280)
-val SuccessGreen = Color(0xFF10B981)
-val ErrorRed = Color(0xFFEF4444)
+// Premium EdTech Theme Colors
+val PremiumPrimary = Color(0xFF6C63FF) // Vibrant Indigo Primary
+val PremiumPrimaryDark = Color(0xFF5750D9)
+val PremiumSecondary = Color(0xFF00C9A7) // Cool Mint Accent
+val PremiumBackgroundLight = Color(0xFFF7F8FA) // Very soft gray/blue tint
+val PremiumSurfaceLight = Color(0xFFFFFFFF)
+val PremiumSurfaceVariantLight = Color(0xFFEDEEF3)
+val PremiumTextDark = Color(0xFF1E2022)
+val PremiumTextMuted = Color(0xFF77838F)
+
+// Dark Mode Colors
+val PremiumBackgroundDark = Color(0xFF121212)
+val PremiumSurfaceDark = Color(0xFF1E1E1E)
+val PremiumSurfaceVariantDark = Color(0xFF2C2C2C)
+val PremiumTextLight = Color(0xFFE0E0E0)
+val PremiumTextMutedDark = Color(0xFFA0A0A0)
+
+val PremiumError = Color(0xFFFF5252)
+val PremiumWarning = Color(0xFFFFB020)
+val PremiumSuccess = Color(0xFF00E676)

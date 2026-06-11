@@ -120,5 +120,21 @@ dependencies {
   "ksp"(libs.moshi.kotlin.codegen)
 }
 
+tasks.register("copyDebugApk") {
+    dependsOn("assembleDebug")
+    doLast {
+        val buildApk = file("build/outputs/apk/debug/app-debug.apk")
+        if (buildApk.exists()) {
+            val dest1 = file("../APK_DOWNLOAD/app-debug.apk")
+            val dest2 = file("../.build-outputs/app-debug.apk")
+            dest1.parentFile.mkdirs()
+            dest2.parentFile.mkdirs()
+            buildApk.copyTo(dest1, overwrite = true)
+            buildApk.copyTo(dest2, overwrite = true)
+            println("Copied APK: " + (buildApk.length() / 1024 / 1024) + "MB")
+        }
+    }
+}
+
 
 
