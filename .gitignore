@@ -16,3 +16,7 @@
 local.properties
 .env
 debug.keystore
+
+# Allow APK in APK_DOWNLOAD
+!APK_DOWNLOAD/
+!APK_DOWNLOAD/*.apk
