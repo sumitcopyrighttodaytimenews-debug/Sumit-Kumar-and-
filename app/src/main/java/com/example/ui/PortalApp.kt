@@ -68,11 +68,7 @@ fun PortalApp(viewModel: PortalViewModel) {
         containerColor = MaterialTheme.colorScheme.background
     ) { innerPadding ->
         Box(modifier = Modifier.padding(innerPadding)) {
-            if (studentId == null) {
-                AuthScreen(viewModel)
-            } else {
-                MainAppScreen(viewModel)
-            }
+            MainAppScreen(viewModel)
         }
     }
 }
@@ -140,9 +136,6 @@ fun MainAppScreen(viewModel: PortalViewModel) {
                         }
                         IconButton(onClick = { viewModel.loadBookmarksAndWatchMetrics(); activeTab = 2 }) {
                             Icon(Icons.Filled.Bookmark, contentDescription = "Bookmarks", tint = MaterialTheme.colorScheme.primary)
-                        }
-                        IconButton(onClick = { viewModel.logout() }) {
-                            Icon(Icons.Filled.Logout, contentDescription = "Logout", tint = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
                     }
                 }

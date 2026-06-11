@@ -65,11 +65,17 @@ class PortalViewModel(application: Application) : AndroidViewModel(application) 
 
     init {
         fetchGlobalNotice()
-        if (_studentId.value != null) {
-            loadBatches()
-            loadBookmarksAndWatchMetrics()
-            loadLeaderboard()
+        if (_studentId.value == null) {
+            _studentId.value = "guest_user_123"
+            _studentName.value = "Guest Student"
+            sharedPrefs.edit()
+                .putString("studentId", "guest_user_123")
+                .putString("studentName", "Guest Student")
+                .apply()
         }
+        loadBatches()
+        loadBookmarksAndWatchMetrics()
+        loadLeaderboard()
     }
 
     fun toggleAuthMode() {
