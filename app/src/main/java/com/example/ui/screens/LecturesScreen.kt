@@ -129,7 +129,7 @@ fun LecturesScreen(viewModel: PortalViewModel) {
                         EmptyPlaceholder(message = "No lecture streams loaded yet.")
                     } else {
                         LazyColumn(
-                            contentPadding = PaddingValues(24.dp),
+                            contentPadding = PaddingValues(16.dp),
                             verticalArrangement = Arrangement.spacedBy(16.dp),
                             modifier = Modifier.fillMaxSize()
                         ) {
@@ -147,38 +147,35 @@ fun LecturesScreen(viewModel: PortalViewModel) {
 
                                 Card(
                                     onClick = { viewModel.playVideo(lecture) },
-                                    shape = RoundedCornerShape(20.dp),
+                                    shape = RoundedCornerShape(16.dp),
                                     border = BorderStroke(1.dp, if (isPlaying) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.outline),
                                     colors = CardDefaults.cardColors(
                                         containerColor = if (isPlaying) MaterialTheme.colorScheme.primaryContainer.copy(alpha=0.3f) else MaterialTheme.colorScheme.surface
                                     ),
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
-                                    Row(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(16.dp),
-                                        horizontalArrangement = Arrangement.spacedBy(16.dp)
+                                    Column(
+                                        modifier = Modifier.fillMaxWidth()
                                     ) {
                                         Box(
                                             modifier = Modifier
-                                                .width(120.dp)
+                                                .fillMaxWidth()
                                                 .aspectRatio(16f / 9f)
-                                                .background(MaterialTheme.colorScheme.surfaceVariant, RoundedCornerShape(12.dp)),
+                                                .background(MaterialTheme.colorScheme.surfaceVariant),
                                             contentAlignment = Alignment.Center
                                         ) {
                                             Icon(
                                                 Icons.Filled.PlayArrow,
                                                 contentDescription = "Play",
                                                 tint = MaterialTheme.colorScheme.onSurfaceVariant,
-                                                modifier = Modifier.size(32.dp)
+                                                modifier = Modifier.size(48.dp)
                                             )
                                         }
 
-                                        Column(modifier = Modifier.weight(1f)) {
+                                        Column(modifier = Modifier.padding(16.dp)) {
                                             Text(
                                                 text = "Class ${lecture.classNum ?: ""}: ${lecture.lectureName ?: ""}",
-                                                style = MaterialTheme.typography.titleMedium,
+                                                style = MaterialTheme.typography.titleLarge,
                                                 color = MaterialTheme.colorScheme.onSurface,
                                                 maxLines = 2,
                                                 overflow = TextOverflow.Ellipsis
@@ -187,13 +184,13 @@ fun LecturesScreen(viewModel: PortalViewModel) {
                                                 text = formattedDate,
                                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                                 style = MaterialTheme.typography.bodyMedium,
-                                                modifier = Modifier.padding(top = 8.dp)
+                                                modifier = Modifier.padding(top = 4.dp)
                                             )
 
                                             Row(
                                                 modifier = Modifier
                                                     .fillMaxWidth()
-                                                    .padding(top = 12.dp),
+                                                    .padding(top = 16.dp),
                                                 horizontalArrangement = Arrangement.SpaceBetween,
                                                 verticalAlignment = Alignment.CenterVertically
                                             ) {
@@ -203,10 +200,10 @@ fun LecturesScreen(viewModel: PortalViewModel) {
                                                         modifier = Modifier.clickable {
                                                             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(lecture.notesUrl))
                                                             context.startActivity(intent)
-                                                        }.padding(4.dp)
+                                                        }.padding(8.dp)
                                                     ) {
-                                                        Icon(Icons.Filled.Description, "PDF", tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(16.dp))
-                                                        Spacer(modifier=Modifier.width(4.dp))
+                                                        Icon(Icons.Filled.Description, "PDF", tint = MaterialTheme.colorScheme.primary, modifier = Modifier.size(20.dp))
+                                                        Spacer(modifier=Modifier.width(8.dp))
                                                         Text("Notes", color = MaterialTheme.colorScheme.primary, style = MaterialTheme.typography.labelLarge)
                                                     }
                                                 } else {
@@ -217,13 +214,13 @@ fun LecturesScreen(viewModel: PortalViewModel) {
                                                     onClick = {
                                                         viewModel.toggleBookmark(lecture, formattedDate, "")
                                                     },
-                                                    modifier = Modifier.size(32.dp)
+                                                    modifier = Modifier.size(40.dp)
                                                 ) {
                                                     Icon(
                                                         imageVector = Icons.Filled.Bookmark,
                                                         contentDescription = "Save Bookmarks",
                                                         tint = if (isBookmarked) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha=0.5f),
-                                                        modifier = Modifier.size(20.dp)
+                                                        modifier = Modifier.size(24.dp)
                                                     )
                                                 }
                                             }
@@ -240,7 +237,7 @@ fun LecturesScreen(viewModel: PortalViewModel) {
                         EmptyPlaceholder(message = "Notes PDF study files will appear here.")
                     } else {
                         LazyColumn(
-                            contentPadding = PaddingValues(24.dp),
+                            contentPadding = PaddingValues(16.dp),
                             verticalArrangement = Arrangement.spacedBy(16.dp),
                             modifier = Modifier.fillMaxSize()
                         ) {

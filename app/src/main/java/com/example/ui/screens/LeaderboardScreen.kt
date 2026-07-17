@@ -44,8 +44,8 @@ fun LeaderboardScreen(viewModel: PortalViewModel) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(24.dp),
-            shape = RoundedCornerShape(32.dp),
+                .padding(16.dp),
+            shape = RoundedCornerShape(24.dp),
             elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
             colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
         ) {
@@ -57,7 +57,7 @@ fun LeaderboardScreen(viewModel: PortalViewModel) {
                             colors = listOf(MaterialTheme.colorScheme.primary, MaterialTheme.colorScheme.tertiary)
                         )
                     )
-                    .padding(32.dp),
+                    .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
@@ -78,12 +78,12 @@ fun LeaderboardScreen(viewModel: PortalViewModel) {
             text = "Leaderboard Champions",
             style = MaterialTheme.typography.titleLarge,
             color = MaterialTheme.colorScheme.onBackground,
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 8.dp)
+            modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
 
         LazyColumn(
-            contentPadding = PaddingValues(24.dp),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
             modifier = Modifier.fillMaxSize()
         ) {
             if (sortedLeaderboard.isEmpty()) {
@@ -105,7 +105,7 @@ fun LeaderboardScreen(viewModel: PortalViewModel) {
                     }
 
                     Card(
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(16.dp),
                         colors = CardDefaults.cardColors(
                             containerColor = if (realIsMe) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surface
                         ),

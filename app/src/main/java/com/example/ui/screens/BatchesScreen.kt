@@ -3,9 +3,8 @@ package com.example.ui.screens
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.PlayArrow
@@ -41,17 +40,15 @@ fun BatchesScreen(viewModel: PortalViewModel) {
             }
         }
     } else {
-        LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 320.dp),
-            contentPadding = PaddingValues(24.dp),
-            verticalArrangement = Arrangement.spacedBy(24.dp),
-            horizontalArrangement = Arrangement.spacedBy(24.dp),
+        LazyColumn(
+            contentPadding = PaddingValues(16.dp),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
             modifier = Modifier.fillMaxSize()
         ) {
             items(batches) { batch ->
                 Card(
                     onClick = { viewModel.selectBatch(batch) },
-                    shape = RoundedCornerShape(24.dp),
+                    shape = RoundedCornerShape(16.dp),
                     colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
                     elevation = CardDefaults.cardElevation(defaultElevation = 0.dp),
                     border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
@@ -65,7 +62,7 @@ fun BatchesScreen(viewModel: PortalViewModel) {
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .aspectRatio(16f / 9f)
-                                    .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
+                                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
                                 contentScale = ContentScale.Crop
                             )
                         } else {
@@ -78,14 +75,14 @@ fun BatchesScreen(viewModel: PortalViewModel) {
                                             colors = listOf(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.colorScheme.secondaryContainer)
                                         )
                                     )
-                                    .clip(RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp)),
+                                    .clip(RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text("Edu Premium Class", color = MaterialTheme.colorScheme.onPrimaryContainer, style = MaterialTheme.typography.titleLarge)
                             }
                         }
 
-                        Column(modifier = Modifier.padding(24.dp)) {
+                        Column(modifier = Modifier.padding(16.dp)) {
                             Text(
                                 text = batch.name ?: "Course Batch",
                                 style = MaterialTheme.typography.titleLarge,
